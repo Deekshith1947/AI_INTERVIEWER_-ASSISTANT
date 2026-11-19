@@ -1,6 +1,6 @@
 import streamlit as st
 from groq import Groq
-st.set_page_config(page_title = "AI Interview Assistant", page_icon = '🫡', layout= 'centered')
+st.set_page_config(page_title = "AI Interview Assistant", page_icon = '🫵🏻', layout= 'centered')
 st.title("AI Interview Asssitant ")
 st.caption(" it is a platform for getting information")
 try:
@@ -24,7 +24,7 @@ else:
   answer = st.text_area('enter your answer ', height = 160)
 
 if st.button("Generate AI Response", type = "primary"):
-  if mode in ['Evaluate Answers', 'Imporve Answer'] and (not question.strip()) or (not answer.strip()):
+  if mode in ['Evaluate Answers', 'Imporve Answers'] and (not question.strip() or not answer.strip()):
     st.warning("please enter valid question and answer")
     st.stop()
   topics = "Topics is " + topic + "difficlty is " + level 
@@ -45,4 +45,12 @@ if st.button("Generate AI Response", type = "primary"):
                      {"role" : "user",
                      "content" : backgroound + task }],
          temprature = 0.7,
-         max_tokens = 2000
+         max_tokens = 2000)
+         output response.choices[0].message.content
+       st.subheader("AI Response")
+       st.markdown(output)
+       st.download_button("Download Response", output, file_name = "Interview_Response.txt", mine = 'text/plain')
+     except Exception as e:
+       st.error ("API connection was unsuccessful :", e)
+       st.info ("Please check your API Key and rate limits")
+       st.caption("Powered by Streamlit.io and GitHub. Using LLM API")
