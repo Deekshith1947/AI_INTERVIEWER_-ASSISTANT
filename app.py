@@ -23,7 +23,7 @@ else:
   question = st.text_area('Enter interview question here ')
   answer = st.text_area('enter your answer ', height = 160)
 
-if st.button(("Generate AI Response", type = "primary"):
+if st.button("Generate AI Response", type = "primary"):
   if mode in ['Evaluate Answers', 'Imporve Answers'] and (not question.strip() or not answer.strip()):
     st.warning("please enter valid question and answer")
     st.stop()
@@ -52,5 +52,5 @@ if st.button(("Generate AI Response", type = "primary"):
        st.download_button("Download Response", output, file_name = "Interview_Response.txt", mine = 'text/plain')
      except Exception as e:
        st.error ("API connection was unsuccessful :", e)
-       st.info ("Please check your API Key and rate limits"))
+       st.info ("Please check your API Key and rate limits")
        st.caption("Powered by Streamlit.io and GitHub. Using LLM API")
